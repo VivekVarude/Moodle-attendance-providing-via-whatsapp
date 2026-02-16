@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Attendance Dashboard</title>
+  <style>
+    body {
+      background: #f2f7ff;
+      font-family: 'Arial', sans-serif;
+      padding: 40px;
+    }
+
+    h2 {
+      text-align: center;
+      color: #333;
+      margin-bottom: 30px;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      background-color: #fff;
+      box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+      border-radius: 12px;
+      overflow: hidden;
+    }
+
+    th, td {
+      padding: 15px;
+      text-align: center;
+      border-bottom: 1px solid #ddd;
+      color: #333;
+    }
+
+    th {
+      background-color: #4CAF50;
+      color: white;
+    }
+
+    tr:hover {
+      background-color: #f1f1f1;
+    }
+
+    .present {
+      color: green;
+      font-weight: bold;
+    }
+
+    .absent {
+      color: red;
+      font-weight: bold;
+    }
+
+    button {
+      padding: 8px 15px;
+      background-color: #4CAF50;
+      color: #fff;
+      border: none;
+      border-radius: 8px;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    button:hover {
+      background-color: #45a049;
+    }
+
+    #response {
+      margin-top: 20px;
+      text-align: center;
+      font-weight: bold;
+      color: green;
+    }
+  </style>
+</head>
+<body>
+
+  <h2>Student Attendance Dashboard</h2>
+
+  <table>
+    <thead>
+      <tr>
+        <th>Roll No</th>
+        <th>Student Name</th>
+        <th>WhatsApp Number</th>
+        <th>Lecture No</th>
+        <th>Status</th>
+        <th>Action</th>
+      </tr>
+    </thead>
+    <tbody id="studentTable">
+      <!-- Students will be generated here by JS -->
+    </tbody>
+  </table>
+
+  <div id="response"></div>
+
+  <script>
+    // Sample 20 students data
+    const students = [
+      {id: 1, name: 'Harsha', number: '9356730587'},
+      {id: 2, name: 'Prathamesh', number: '8459578020'},
+      {id: 3, name: 'Vivek', number: '9423331433'},
+      {id: 4, name: 'Amit', number: '9876543210'},
+      {id: 5, name: 'Rohit', number: '9865321470'},
+      {id: 6, name: 'Sneha', number: '9988776655'},
+      {id: 7, name: 'Kiran', number: '9123456789'},
+      {id: 8, name: 'Pooja', number: '9012345678'},
+      {id: 9, name: 'Suresh', number: '9801234567'},
+      {id: 10, name: 'Ramesh', number: '9701234567'},
+      {id: 11, name: 'Geeta', number: '9601234567'},
+      {id: 12, name: 'Meena', number: '9501234567'},
+      {id: 13, name: 'Anil', number: '9401234567'},
+      {id: 14, name: 'Sunil', number: '9301234567'},
+      {id: 15, name: 'Neha', number: '9201234567'},
+      {id: 16, name: 'Akash', number: '9101234567'},
+      {id: 17, name: 'Vaibhav', number: '9001234567'},
+      {id: 18, name: 'Komal', number: '8891234567'},
+      {id: 19, name: 'Nikhil', number: '8781234567'},
+      {id: 20, name: 'Varsha', number: '8671234567'}
+    ];
+
+    const tableBody = document.getElementById('studentTable');
+
+    students.forEach((student, index) => {
+      tableBody.innerHTML += `
+        <tr>
+          <td>${index + 1}</td>
+          <td>${student.name}</td>
+          <td>${student.number}</td>
+          <td>1</td>
+          <td class="status">Pending</td>
+          <td><button onclick="markAttendance(this, '${student.name}')">Send Message</button></td>
+        </tr>
+      `;
+    });
+
+    function markAttendance(button, studentName) {
+      const statusCell = button.parentElement.parentElement.querySelector('.status');
+      statusCell.textContent = 'Present';
+      statusCell.classList.remove('absent');
+      statusCell.classList.add('present');
+
+      document.getElementById('response').innerText = `✅ WhatsApp Message sent successfully to ${studentName}`;
+    }
+  </script>
+
+</body>
+</html>
